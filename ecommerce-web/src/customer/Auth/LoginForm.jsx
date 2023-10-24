@@ -1,9 +1,13 @@
 import { Button, Grid, TextField } from '@mui/material';
-import React from 'react';
+import { login } from 'State/Auth/Action';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -11,6 +15,8 @@ const LoginForm = () => {
       email: data.get('email'),
       password: data.get('password'),
     };
+
+    dispatch(login(userData))
     console.log('userData: ', userData);
   };
 
